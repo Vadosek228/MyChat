@@ -2,6 +2,7 @@ package ru.vladislav_akulinin.mychat_version_2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -303,6 +304,13 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    //не получать уведомления от одного и того же пользователя
+    private void currentUser(String userid){
+        SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+        editor.putString("currentuser",userid);
+        editor.apply();
+    }
+
     //для пользовательского статуса
     private void status(String status){
         reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
@@ -317,6 +325,7 @@ public class MessageActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         status("online");
+        currentUser(userid); //не получать уведомления от одного и тогоже пользователя
     }
 
     @Override
@@ -331,5 +340,6 @@ public class MessageActivity extends AppCompatActivity {
 //        }
 
         status("offline");
+        currentUser("none"); //не получать уведомления от одного и того же пользователя
     }
 }

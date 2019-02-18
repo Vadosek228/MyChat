@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -22,13 +23,18 @@ import ru.vladislav_akulinin.mychat_version_2.MessageActivity;
 
 public class MyFirebaseMessaging extends FirebaseMessagingService {
 
-    private static final String TAG = "Ila pidr";
+    private static final String TAG = "No Sender";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
         String sender = remoteMessage.getData().get("sender");
+        String user = remoteMessage.getData().get("user");
+
+        //не получать уведомления от одного и тогоже пользователя
+        SharedPreferences preferences = getSharedPreferences("PREFS", MODE_PRIVATE);
+        String currentUser = preferences.getString("currentuser", "none");
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -49,15 +55,18 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 //        }
 
         if(sender != null && firebaseUser != null && sender.equals(firebaseUser.getUid())){
-
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                senderOreoNotification(remoteMessage);
+            if(!currentUser.equals(user)){
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    senderOreoNotification(remoteMessage);
+                }else {
+                    sendNotification(remoteMessage);
+                }
             }
-                sendNotification(remoteMessage);
         } else {
             Log.e(TAG, "Не отправилось!");
             sendNotification(remoteMessage);
         }
+
 
     }
 

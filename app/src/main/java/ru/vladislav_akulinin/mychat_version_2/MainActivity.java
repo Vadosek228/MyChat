@@ -29,6 +29,7 @@ import ru.vladislav_akulinin.mychat_version_2.Adapter.ViewPagerAdapter;
 import ru.vladislav_akulinin.mychat_version_2.Fragments.ChatsFragment;
 import ru.vladislav_akulinin.mychat_version_2.Fragments.ProfileFragment;
 import ru.vladislav_akulinin.mychat_version_2.Fragments.UsersFragment;
+import ru.vladislav_akulinin.mychat_version_2.Model.Chat;
 import ru.vladislav_akulinin.mychat_version_2.Model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,18 +84,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
-        ViewPager viewPager = findViewById(R.id.view_pager);
+        final TabLayout tabLayout = findViewById(R.id.tab_layout);
+        final ViewPager viewPager = findViewById(R.id.view_pager);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        //добавление количества непрочитанных сообщений
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+                int unread = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if(chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen()){
+                        unread++;
+                    }
+                }
 
-        viewPagerAdapter.addFragments(new ChatsFragment(), "Чаты");
-        viewPagerAdapter.addFragments(new UsersFragment(), "Пользователи");
-        viewPagerAdapter.addFragments(new ProfileFragment(), "Профиль");
+                if(unread == 0){
+                    viewPagerAdapter.addFragments(new ChatsFragment(), "Чаты");
+                }
+                else {
+                    viewPagerAdapter.addFragments(new ChatsFragment(), "("+unread+") Чаты");
+                }
 
-        viewPager.setAdapter(viewPagerAdapter);
+                viewPagerAdapter.addFragments(new UsersFragment(), "Пользователи");
+                viewPagerAdapter.addFragments(new ProfileFragment(), "Профиль");
 
-        tabLayout.setupWithViewPager(viewPager);
+                viewPager.setAdapter(viewPagerAdapter);
+
+                tabLayout.setupWithViewPager(viewPager);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
