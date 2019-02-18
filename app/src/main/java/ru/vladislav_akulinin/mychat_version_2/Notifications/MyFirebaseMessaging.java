@@ -28,13 +28,13 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //модификация
-//        try {
+        try {
             if(firebaseUser != null && sender.equals(firebaseUser.getUid())){
                 sendNotification(remoteMessage);
             }
-//        }catch (NullPointerException exc){
+        }catch (NullPointerException exc){
 //            Toast.makeText(MyFirebaseMessaging.this, "Ошибка принятия", Toast.LENGTH_SHORT).show();
-//        }
+        }
 
     }
 
