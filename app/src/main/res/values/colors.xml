@@ -7,4 +7,7 @@
     <color name="colorChatBackground">#e6e6e6</color>
     <color name="colorUserStatusOn">#05df29</color>
     <color name="colorUserStatusOff">#bfbfbf</color>
+    <color name="colorGray">#BBB</color>
+    <color name="colorWhiteish">#FAFAFA</color>
+    <color name="colorButtom">#fd7401</color>
 </resources>

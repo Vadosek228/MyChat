@@ -33,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_start_2);
 
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
