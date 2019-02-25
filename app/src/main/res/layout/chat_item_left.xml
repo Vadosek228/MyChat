@@ -9,7 +9,7 @@
         android:id="@+id/profile_image"
         android:layout_width="@dimen/dimenCircleUserChat"
         android:layout_height="@dimen/dimenCircleUserChat"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/ic_user"/>
 
     <TextView
         android:id="@+id/show_message"

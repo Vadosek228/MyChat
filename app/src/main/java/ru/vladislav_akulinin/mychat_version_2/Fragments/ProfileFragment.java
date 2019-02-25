@@ -75,7 +75,7 @@ public class ProfileFragment extends Fragment {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
                 if(user.getImageURL().equals("default")){
-                    image_profile.setImageResource(R.mipmap.ic_launcher);
+                    image_profile.setImageResource(R.drawable.ic_user);
                 }else {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
                     //нельзя загружать изобращение в еще не созданный фрагмент!!!! (ошибка)

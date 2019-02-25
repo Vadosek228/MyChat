@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 try { //обработка исключений, если не найденны данные на сервере
                     username.setText(user.getUsername());
                     if(user.getImageURL().equals("default")){
-                        profile_image.setImageResource(R.mipmap.ic_launcher); //картинка по умолчанию
+                        profile_image.setImageResource(R.drawable.ic_user); //картинка по умолчанию
                     }
                     else{
 //                        Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_image);

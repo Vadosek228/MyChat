@@ -10,4 +10,6 @@
     <color name="colorGray">#BBB</color>
     <color name="colorWhiteish">#FAFAFA</color>
     <color name="colorButtom">#fd7401</color>
+    <color name="colorLins">#dedede</color>
+    <color name="colorBackgroundChat">#f9f6f6</color>
 </resources>

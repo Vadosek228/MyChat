@@ -46,22 +46,36 @@
         android:layout_above="@id/bottom"
         />
 
-    <RelativeLayout
+
+
+    <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:background="@color/colorBackgroundChat"
+        android:minHeight="48dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:layout_alignParentBottom="true">
 
         <EditText
             android:id="@+id/text_send"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:hint="Введите сообщение..."
-            android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true" />
+            android:hint="Написать сообщение"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="9dp"
+            android:paddingEnd="9dp"
+            android:background="@drawable/login_input_bg"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:textSize="14.25sp"
+            android:maxLines="6"/>
 
         <ImageButton
             android:id="@+id/btn_send"
@@ -71,6 +85,6 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
