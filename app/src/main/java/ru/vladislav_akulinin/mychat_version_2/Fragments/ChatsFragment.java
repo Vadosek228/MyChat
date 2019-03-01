@@ -1,13 +1,16 @@
 package ru.vladislav_akulinin.mychat_version_2.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.vladislav_akulinin.mychat_version_2.Adapter.UserAdapter;
-import ru.vladislav_akulinin.mychat_version_2.Model.Chat;
+import ru.vladislav_akulinin.mychat_version_2.MainActivity;
 import ru.vladislav_akulinin.mychat_version_2.Model.Chatlist;
 import ru.vladislav_akulinin.mychat_version_2.Model.User;
 import ru.vladislav_akulinin.mychat_version_2.Notifications.Token;
@@ -47,6 +50,7 @@ public class ChatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chats, container, false);
+        setHasOptionsMenu(true); // для использования CreateOptionsMenu для изменения title in toolbar
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -182,5 +186,4 @@ public class ChatsFragment extends Fragment {
 //            }
 //        });
 //    }
-    
 }
